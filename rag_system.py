@@ -1,18 +1,19 @@
 # rag_system.py
-# FINAL PRODUCTION VERSION: Returns detailed information for transparent logging.
 
 import json
 import re
 import config
 import jieba
-from llm_handler import call_llm
+from llm_handler import call_llm # <-- THE MISSING IMPORT IS NOW ADDED
 
-# --- Database Loading (Unchanged) ---
+# --- Database Loading ---
 def load_terminology_db(file_path):
+    """Loads the terminology database from a JSON file."""
     with open(file_path, 'r', encoding='utf-8') as f:
         return json.load(f)
 
 def create_reverse_dictionary(original_db):
+    """Automatically creates an EN->CN dictionary."""
     reversed_db = {}
     for zh_term, en_translations in original_db.items():
         for en_term in en_translations:
@@ -22,66 +23,74 @@ def create_reverse_dictionary(original_db):
 CN_TO_EN_DB = load_terminology_db(config.TERMINOLOGY_FILE)
 EN_TO_CN_DB = create_reverse_dictionary(CN_TO_EN_DB)
 
-# --- Core Logic (Unchanged) ---
+# --- Core Logic ---
 def detect_language(text: str) -> str:
+    """Detects if the text is primarily Chinese or English."""
     if re.search(r'[\u4e00-\u9fff]', text):
         return 'zh'
     return 'en'
 
-# --- MAIN PIPELINE (Updated to return more data) ---
+def find_terms_in_text(source_text, db, lang):
+    """Finds glossary terms using a smarter, longest-match-first strategy."""
+    found_terms = {}
+    text_to_search = source_text
+    # Sort keys by length, descending, to find "matt ink" before "matt"
+    sorted_keys = sorted(db.keys(), key=len, reverse=True)
+    
+    for term in sorted_keys:
+        # Use word boundaries for English to avoid matching parts of words
+        pattern = r'\b' + re.escape(term) + r'\b' if lang == 'en' else re.escape(term)
+        
+        # Use re.search for case-insensitivity
+        if re.search(pattern, text_to_search, re.IGNORECASE):
+            # We use the original key from the DB for consistency
+            found_terms[term] = db[term]
+            # Blank out the found term so we don't match its substrings
+            text_to_search = re.sub(pattern, " " * len(term), text_to_search, flags=re.IGNORECASE)
+            
+    return found_terms
+
+# --- The Main Pipeline Function ---
 def master_translation_pipeline(source_text: str, model, tokenizer):
     """
-    Orchestrates the full 3-stage translation process and returns detailed results.
+    Orchestrates the translation using the final, most robust prompt.
     """
     lang = detect_language(source_text)
     db = CN_TO_EN_DB if lang == 'zh' else EN_TO_CN_DB
+    found_terms = find_terms_in_text(source_text, db, lang)
     
-    text_for_translation = source_text
-    placeholder_map = {} # Maps placeholders like __TERM_0__ to their final translation
-    found_terms_map = {} # Maps the original source term to its target translation
-    
-    # --- Integrated Find-and-Replace Loop ---
-    sorted_keys = sorted(db.keys(), key=len, reverse=True)
-    
-    i = 0
-    for term in sorted_keys:
-        pattern = r'\b' + re.escape(term) + r'\b' if lang == 'en' else re.escape(term)
-        match = re.search(pattern, text_for_translation, re.IGNORECASE)
+    # --- Prompt Generation Stage ---
+    mini_glossary = "No specific terminology found."
+    if found_terms:
+        if lang == 'zh':
+            lines = [f"- The Chinese term '{zh}' MUST be translated as one of: `{', '.join(en_list)}`" for zh, en_list in found_terms.items()]
+        else: # lang == 'en'
+            lines = [f"- The English term `{en}` MUST be translated as `{zh}`" for en, zh in found_terms.items()]
+        mini_glossary = "\n".join(lines)
 
-        if match:
-            original_term_in_text = match.group(0)
-            placeholder = f" __TERM_{i}__ "
-            
-            # For this simplified example, we'll skip the disambiguation check
-            # and assume all found terms should be replaced.
-            
-            target_translation = db[term][0] if lang == 'zh' else db[term]
-            placeholder_map[placeholder.strip()] = target_translation
-            found_terms_map[original_term_in_text] = target_translation
-            
-            text_for_translation = text_for_translation[:match.start()] + placeholder + text_for_translation[match.end():]
-            i += 1
+    target_language = "English" if lang == 'zh' else "Traditional Chinese (繁體中文)"
+    
+    # This prompt provides strong guidance without being overly complex
+    final_prompt = f"""You are an expert translator specializing in the printing industry. Your task is to translate the "Source Text" into fluent, high-quality {target_language}.
+Strictly follow the rules in the "Terminology Glossary" and the style in the "Examples". Your final output should only be the translation itself, with no extra notes.
 
-    # --- Translation Stage ---
-    prompt_instruction = (
-        "Translate the following Chinese text to fluent English." if lang == 'zh'
-        else "Translate the following English text to Traditional Chinese (繁體中文)."
-    )
-    final_prompt = f"""
-{prompt_instruction} Keep the `__TERM_...__` placeholders exactly as they are. Do not add quotes around the final translation.
-Text to Translate:
-"{text_for_translation}"
+**Terminology Glossary:**
+{mini_glossary}
+
+**Examples:**
+- English: "matt ink for the new printer" -> Chinese: "用於新打印機的哑光油墨"
+- Chinese: "为最终产品要求覆膜处理。" -> English: "Request lamination for the final product."
+
+**Source Text to Translate:**
+"{source_text}"
+
+**Final Translation:**
 """
     
-    translated_masked_text = call_llm(model, tokenizer, final_prompt)
+    final_translation = call_llm(model, tokenizer, final_prompt)
         
-    # --- Post-Processing Stage ---
-    final_translation = translated_masked_text
-    for placeholder, final_term in placeholder_map.items():
-        final_translation = final_translation.replace(placeholder.strip(), final_term)
-        
+    # Return the found terms map for better logging
     return {
         "final_translation": final_translation,
-        "found_terms_map": found_terms_map, # The terms that were identified and replaced
-        "detected_language": lang
+        "found_terms_map": found_terms
     }

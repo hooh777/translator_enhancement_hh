@@ -1,0 +1,58 @@
+[
+    {
+      "id": "gauntlet_en_01",
+      "direction": "EN_to_CN",
+      "source_text": "Subject: Action Required: Final Specs for Order #D-9981 (Deluxe Edition Book)\n\nHi Production Team,\n\nFollowing up on our discussion this morning here in Taipei, please find the final specifications for the deluxe edition hardcover book. The client has approved all materials. The main book will be a high-quality hardback, presented in a protective slipcase. The slipcase itself must be constructed from sturdy 2.5mm greyboard to ensure it is not flimsy. A key feature is that the jacket for the book requires a special matt laminated finish for a premium, non-reflective feel. We must adhere to the following for the book's construction:\n\n- Cover: Standard hardcover wrapped in faux leather, with the title using holographic foil stamping.\n- Endpapers: Custom-printed 140gsm book paper for the front and back endpaper.\n- Interior Paper: 100gsm matte coated paper for all pages.\n\nThis project is high-priority as of June 20, 2025. Please review these specs carefully and confirm the production timeline by end of day. Any questions, let me know. Thanks.",
+      "remark": "A complex EN->CN email detailing nested packaging components for a collector's edition book, written with current date context.",
+      "glossary_terms_to_identify": [
+        "hardcover",
+        "hardback",
+        "slipcase",
+        "greyboard",
+        "jacket",
+        "matt laminated",
+        "endpaper",
+        "book paper",
+        "matte coated paper",
+        "holographic foil stamping"
+      ],
+      "expected_in_translation": [
+        "硬封面",
+        "精装本",
+        "书盒",
+        "灰板",
+        "書套",
+        "哑光覆膜",
+        "封裡頁",
+        "書紙",
+        "克铜版纸",
+        "燙幻彩"
+      ]
+    },
+    {
+      "id": "gauntlet_cn_01",
+      "direction": "CN_to_EN",
+      "source_text": "主旨：關於訂單 #T-5501 的最終生產規格\n\n大家好，\n\n附件是關於 #T-5501 訂單的最終生產規格，請各部門嚴格遵守。這是一個包含多種組件的複雜包装專案。客戶對品質要求極高，尤其是表面處理。我們必須確保所有細節都準確無誤。\n\n主要材料與工藝要求如下：\n- 主結構：使用1500克雙層灰板，確保盒子堅固不變形。\n- 表面裱紙：外部需要裱157克的克铜版纸，要求平整無氣泡。\n- 印刷油墨：所有圖案必須使用指定的哑光油墨，以避免不必要的反光。\n- 保護處理：成品需經過上光處理，然後用收缩膜進行單獨包装。\n- 內襯：盒子內部需要一個絲絨材質的内衬來保護產品。\n\n請注意，上光是為了增加耐磨性，而不是為了亮度。請立即準備相關材料，並在今日（2025年6月20日）下班前回報物料庫存狀況。若有任何問題，請馬上提出。",
+      "remark": "A complex CN->EN internal memo outlining production specs in a bulleted list, written with current date context.",
+      "glossary_terms_to_identify": [
+        "包装",
+        "灰板",
+        "裱",
+        "克铜版纸",
+        "哑光油墨",
+        "上光",
+        "收缩膜",
+        "内衬"
+      ],
+      "expected_in_translation": [
+        "packaging",
+        "greyboard",
+        "laminating",
+        "gsm coated paper",
+        "matt ink",
+        "varnishing",
+        "shrink wrap",
+        "lining"
+      ]
+    }
+  ]

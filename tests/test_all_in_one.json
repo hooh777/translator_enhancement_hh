@@ -1,0 +1,82 @@
+[
+    {
+      "id": "email_A_en_01",
+      "direction": "EN_to_CN",
+      "source_text": "Subject: Action Required: Final Specs for Order #D-9981 (Deluxe Edition Book)\n\nHi Production Team,\n\nPlease find the final specifications for the deluxe edition hardcover book. The client has approved all materials and processes. The main book will be a high-quality hardback, presented in a protective slipcase. The slipcase itself should be constructed from sturdy 2.5mm greyboard. The jacket for the book requires a special matt laminated finish for a premium, non-reflective feel. We must adhere to the following for the book's construction:\n\n- Cover: Standard hardcover wrapped in faux leather.\n- Endpapers: Custom-printed 140gsm book paper for the front and back封裡頁.\n- Interior Paper: 100gsm matte coated paper for all pages.\n\nThis project is high-priority. Please review these specs carefully and confirm the production timeline by end of day. Any questions, let me know. Thanks.",
+      "remark": "Scenario A: An EN->CN email with an existing bulleted list of specifications to translate.",
+      "glossary_terms_to_identify": ["hardcover", "hardback", "slipcase", "greyboard", "jacket", "matt laminated", "endpaper", "封裡頁", "book paper", "matte coated paper"],
+      "expected_in_translation": ["硬封面", "精装本", "书盒", "灰板", "書套", "哑光覆膜", "封裡頁", "書紙", "克铜版纸"]
+    },
+    {
+      "id": "email_A_en_02",
+      "direction": "EN_to_CN",
+      "source_text": "Subject: RE: Quote for Custom Playing Cards\n\nHi David,\n\nThanks for sending over the quote. The pricing looks acceptable. We would like to proceed with an order for 20,000 decks. Before we finalize, please confirm you can meet these specific finishing requirements for each paper card:\n\n1.  Primary Stock: 350gsm white card paper.\n2.  Special Finish: A full-coverage, professional-grade poker varnishing must be applied to both sides for optimal glide and durability.\n3.  Logo Highlight: The logo on the back of each card needs to feature holographic foil stamping.\n4.  Packaging: Each deck should be placed in a simple sleeve before being boxed.\n\nThese four points are critical for the final product quality. Once you confirm these details, I will issue the formal purchase order. Let me know if there are any issues with sourcing the poker varnishing. Best,",
+      "remark": "Scenario A: An EN->CN email confirming an order with a numbered list of finishing requirements.",
+      "glossary_terms_to_identify": ["paper card", "white card paper", "poker varnishing", "holographic foil stamping", "sleeve"],
+      "expected_in_translation": ["紙卡", "白卡纸", "撲克油", "燙幻彩", "套筒"]
+    },
+    {
+      "id": "email_A_cn_01",
+      "direction": "CN_to_EN",
+      "source_text": "主旨：關於訂單 #T-5501 的最終生產規格\n\n大家好，\n\n附件是關於 #T-5501 訂單的最終生產規格，請各部門嚴格遵守。這是一個包含多種組件的複雜包装專案。客戶對品質要求極高，尤其是表面處理。我們必須確保所有細節都準確無誤。\n\n主要材料與工藝要求如下：\n- 主結構：使用1500克雙層灰板，確保盒子堅固不變形。\n- 表面裱紙：外部需要裱157克的克铜版纸，要求平整無氣泡。\n- 印刷油墨：所有圖案必須使用指定的哑光油墨，以避免不必要的反光。\n- 保護處理：成品需經過上光處理，然後用收缩膜進行單獨包装。\n- 內襯：盒子內部需要一個絲絨材質的内衬來保護產品。\n\n請注意，上光是為了增加耐磨性，而不是為了亮度。請立即準備相關材料，並在今日下班前回報物料庫存狀況。若有任何問題，請馬上提出。",
+      "remark": "Scenario A: A CN->EN internal memo outlining production specs in a bulleted list.",
+      "glossary_terms_to_identify": ["包装", "灰板", "裱", "克铜版纸", "哑光油墨", "上光", "收缩膜", "内衬"],
+      "expected_in_translation": ["packaging", "greyboard", "laminating", "gsm coated paper", "matt ink", "varnishing", "shrink wrap", "lining"]
+    },
+    {
+      "id": "email_A_cn_02",
+      "direction": "CN_to_EN",
+      "source_text": "主旨：樣品問題反饋與修改要求 (專案 'Phoenix')\n\nHi Eason,\n\n我們收到了 'Phoenix' 專案的樣品，整體效果不錯，但有幾個問題需要修改。客戶認為目前的彩盒太軟，需要加強結構。另外，他們對盒蓋的設計不滿意，希望能有更強的磁吸力。請根據以下要點進行修改：\n\n1.  彩盒材料：請將目前的300克白卡纸更換為更厚的400克白卡纸，並與纸板進行裱合，增加硬度。\n2.  盒蓋設計：修改模切，增強磁鐵吸力，並在頂部增加一個小的燙幻彩標誌。\n3.  保護性包装：目前的氣泡袋保護不足，請改用定制尺寸的收缩膜進行全方位包裹。\n\n這些修改比較緊急，希望能優先處理。請在本週五前提供新的打樣時程。非常感謝你的協助。",
+      "remark": "Scenario A: A CN->EN email providing feedback on a sample and requesting modifications via a numbered list.",
+      "glossary_terms_to_identify": ["彩盒", "白卡纸", "纸板", "裱", "盒蓋", "燙幻彩", "包装", "收缩膜"],
+      "expected_in_translation": ["color box", "white card paper", "paperboard", "laminating", "box cover", "holographic foil stamping", "packaging", "shrink film"]
+    },
+    {
+      "id": "email_A_en_03",
+      "direction": "EN_to_CN",
+      "source_text": "Subject: Inquiry for Custom Paper Bag Production\n\nTo Whom It May Concern,\n\nOur company is seeking a supplier for a large order of custom-printed paper bags for an upcoming event. We require a high-end product with a focus on durability and aesthetics. The general concept is a matte black bag with a gold logo. We have some specific requirements for the materials and finish that we would like a quote on for an initial run of 25,000 units. Please see the list below:\n\n* Bag Material: Heavy-duty 250gsm white card paper, printed full black.\n* Surface Finish: A protective matte coating must be applied to the entire exterior.\n* Lamination: The entire bag should undergo a matt laminated process for water resistance.\n* Handles: Reinforced handles with a custom fabric.\n* Interior: A simple, unprinted lining inside each paper bag.\n\nWe would need these delivered to our warehouse in Taipei by the end of next month. Please provide your best possible pricing and estimated lead time. We look forward to your response. Sincerely, The Marketing Team.",
+      "remark": "Scenario A: An EN->CN formal request for a quote, with specifications detailed in a list.",
+      "glossary_terms_to_identify": ["paper bag", "white card paper", "matte coating", "matt laminated", "lining"],
+      "expected_in_translation": ["紙袋", "白卡纸", "哑光涂层", "哑光覆膜", "内衬"]
+    },
+    {
+      "id": "email_B_en_01",
+      "direction": "EN_to_CN",
+      "source_text": "Subject: Follow-up on Deluxe Hardback Edition\n\nHi Print Team,\n\nFollowing our meeting, I want to summarize the final decisions for the deluxe hardback edition to ensure we are all aligned. We are moving forward with a full hardcover book, which will be protected by an outer jacket. The core of the cover will be constructed from a very thick and rigid paperboard to prevent any bending. For the pages themselves, the client has signed off on using a high-grade 120gsm book paper. A key feature will be the decorative endpaper, which will have a custom map design printed on it. Please ensure all these details are communicated to the factory. The goal is a premium, collectible item, so quality control on the hardcover construction is paramount. Thanks.",
+      "remark": "Scenario B: An EN->CN email where the AI needs to translate the paragraph AND extract the specs into a list.",
+      "glossary_terms_to_identify": ["hardback", "hardcover", "jacket", "paperboard", "book paper", "endpaper"],
+      "expected_in_translation": ["精装本", "硬封面", "書套", "纸板", "書紙", "封裡頁", "類型：精装本", "封面：硬封面"]
+    },
+    {
+      "id": "email_B_cn_01",
+      "direction": "CN_to_EN",
+      "source_text": "主旨：緊急訂單 #A-885 生產規格確認\n\n部門請注意，關於這份緊急訂單，我在此總結一下最終的規格。這是一個為高端電子產品設計的彩盒，因此整体包装的質感非常重要。我們將使用3mm厚的灰板作為主結構，以提供足夠的保護。在灰板的外面，我們會裱上一層157克的克铜版纸，並在其上進行印刷。客戶特別強調，整個盒子的外部，包括盒蓋，都必須有一層均匀的哑光涂层，以達到防刮和高級的視覺效果。這與我們通常使用的亮面上光工藝不同。請務必不要搞混。在所有流程的最後，成品將用收缩膜密封。",
+      "remark": "Scenario B: A CN->EN email where the AI needs to translate the paragraph AND extract the specs into a list.",
+      "glossary_terms_to_identify": ["包装", "彩盒", "灰板", "裱", "克铜版纸", "盒蓋", "哑光涂层", "上光", "收缩膜"],
+      "expected_in_translation": ["packaging", "color box", "greyboard", "laminating", "gsm coated paper", "box cover", "matt coating", "varnishing", "shrink wrap", "Structure: 3mm greyboard", "Surface: 157 gsm coated paper"]
+    },
+    {
+      "id": "email_B_en_02",
+      "direction": "EN_to_CN",
+      "source_text": "Subject: Re: Project 'Oasis' Final Decision\n\nGreat news, the client has made their final decision on the 'Oasis' project packaging. They have opted for the more eco-friendly option. This means we will not be using a plastic shrink film. Instead, the main product, a boardbook for infants, will be housed in a simple cardboard sleeve for protection. The boardbook itself needs to be very safe, so please ensure we use a water-based gloss ink for all the printing. The cover should be a standard hardcover, not a soft cover, as durability is the key selling point for parents. Please proceed with sourcing these materials.",
+      "remark": "Scenario B: An EN->CN email where the AI should translate the paragraph and summarize the selected materials in a list.",
+      "glossary_terms_to_identify": ["packaging", "shrink film", "boardbook", "cardboard", "sleeve", "water-based gloss ink", "hardcover", "soft cover"],
+      "expected_in_translation": ["包装", "收缩膜", "硬板书", "纸板", "套筒", "水性亮光油墨", "硬封面", "软封面", "書籍類型：硬板书", "油墨：水性亮光油墨"]
+    },
+    {
+      "id": "email_B_cn_02",
+      "direction": "CN_to_EN",
+      "source_text": "關於那批要在下週完成的撲克牌，我來總結一下最終的規格。基材是300克的進口白卡纸，這個已經確認。最重要的部分是表面處理，客戶在測試後，最終決定不要普通的上光，而是要我們最高級的撲克油處理，以保證最佳的滑順度。另外，他們還追加了一個需求，希望在牌盒的外面燙幻彩的logo，這是一個新增的工藝。牌盒本身就是我們標準的書盒結構。請確保這些最終修改都已經反映在工單上。",
+      "remark": "Scenario B: A CN->EN email summarizing final specs from a dense paragraph, requiring the AI to extract them into a list.",
+      "glossary_terms_to_identify": ["白卡纸", "上光", "撲克油", "燙幻彩", "书盒"],
+      "expected_in_translation": ["white card paper", "varnishing", "poker varnishing", "holographic foil stamping", "slipcase", "Base Material: 300g white card paper", "Special Finish: poker varnishing"]
+    },
+    {
+      "id": "email_B_cn_03",
+      "direction": "CN_to_EN",
+      "source_text": "你好，這是針對新書《深海》的製作要求。這是一本平装封面設計的書籍，但我們希望它看起來比一般的软封面更有質感。因此，我們決定在封面上採用哑光覆膜工藝。内頁方面，我们將使用100克的書紙。比較特別的是，這本書的封裡頁將使用黑色的特殊纸张，這會與書的整體設計非常搭配。請根據這些描述為我們準備一份詳細的報價單。",
+      "remark": "Scenario B: A CN->EN email written in prose, which should be translated into an English email with a clear, extracted list of specs.",
+      "glossary_terms_to_identify": ["平装封面", "软封面", "哑光覆膜", "書紙", "封裡頁"],
+      "expected_in_translation": ["paperback", "soft cover", "matte laminated", "book paper", "endpaper", "Book Type: Paperback", "Cover Finish: Matte Laminated"]
+    }
+  ]
