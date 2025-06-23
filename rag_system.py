@@ -1,10 +1,11 @@
 # rag_system.py
+# FINAL ARCHITECTURE: Uses a powerful Few-Shot RAG prompt for the highest quality translations.
 
 import json
 import re
 import config
 import jieba
-from llm_handler import call_llm # <-- THE MISSING IMPORT IS NOW ADDED
+from llm_handler import call_llm
 
 # --- Database Loading ---
 def load_terminology_db(file_path):
@@ -36,18 +37,21 @@ def find_terms_in_text(source_text, db, lang):
     text_to_search = source_text
     # Sort keys by length, descending, to find "matt ink" before "matt"
     sorted_keys = sorted(db.keys(), key=len, reverse=True)
-    
+
     for term in sorted_keys:
         # Use word boundaries for English to avoid matching parts of words
         pattern = r'\b' + re.escape(term) + r'\b' if lang == 'en' else re.escape(term)
-        
+
         # Use re.search for case-insensitivity
         if re.search(pattern, text_to_search, re.IGNORECASE):
-            # We use the original key from the DB for consistency
-            found_terms[term] = db[term]
+            # Find the actual text that matched to use as the key
+            match = re.search(pattern, text_to_search, re.IGNORECASE)
+            # We use the original key from the DB for consistency in the glossary
+            original_db_key = term
+            found_terms[match.group(0)] = db[original_db_key]
             # Blank out the found term so we don't match its substrings
-            text_to_search = re.sub(pattern, " " * len(term), text_to_search, flags=re.IGNORECASE)
-            
+            text_to_search = text_to_search.replace(match.group(0), " " * len(match.group(0)))
+
     return found_terms
 
 # --- The Main Pipeline Function ---
@@ -58,7 +62,7 @@ def master_translation_pipeline(source_text: str, model, tokenizer):
     lang = detect_language(source_text)
     db = CN_TO_EN_DB if lang == 'zh' else EN_TO_CN_DB
     found_terms = find_terms_in_text(source_text, db, lang)
-    
+
     # --- Prompt Generation Stage ---
     mini_glossary = "No specific terminology found."
     if found_terms:
@@ -69,10 +73,10 @@ def master_translation_pipeline(source_text: str, model, tokenizer):
         mini_glossary = "\n".join(lines)
 
     target_language = "English" if lang == 'zh' else "Traditional Chinese (繁體中文)"
-    
+
     # This prompt provides strong guidance without being overly complex
-    final_prompt = f"""You are an expert translator specializing in the printing industry. Your task is to translate the "Source Text" into fluent, high-quality {target_language}.
-Strictly follow the rules in the "Terminology Glossary" and the style in the "Examples". Your final output should only be the translation itself, with no extra notes.
+    final_prompt = f"""You are an expert translator for the printing industry. Your task is to translate the "Source Text" into fluent, high-quality {target_language}.
+Strictly follow the rules in the "Terminology Glossary" and the style in the "Examples". Your final output should only be the translation itself, with no extra notes or commentary.
 
 **Terminology Glossary:**
 {mini_glossary}
@@ -86,10 +90,10 @@ Strictly follow the rules in the "Terminology Glossary" and the style in the "Ex
 
 **Final Translation:**
 """
-    
+
     final_translation = call_llm(model, tokenizer, final_prompt)
-        
-    # Return the found terms map for better logging
+
+    # Return the found terms map for better logging and highlighting
     return {
         "final_translation": final_translation,
         "found_terms_map": found_terms
