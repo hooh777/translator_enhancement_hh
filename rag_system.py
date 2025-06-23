@@ -1,19 +1,18 @@
 # rag_system.py
+# FINAL, SIMPLIFIED ARCHITECTURE: Uses a direct, unambiguous prompt to avoid model confusion.
 
 import json
 import re
 import config
 import jieba
-from llm_handler import call_llm # <-- THE MISSING IMPORT IS NOW ADDED
+from llm_handler import call_llm
 
-# --- Database Loading ---
+# --- Database Loading (Unchanged) ---
 def load_terminology_db(file_path):
-    """Loads the terminology database from a JSON file."""
     with open(file_path, 'r', encoding='utf-8') as f:
         return json.load(f)
 
 def create_reverse_dictionary(original_db):
-    """Automatically creates an EN->CN dictionary."""
     reversed_db = {}
     for zh_term, en_translations in original_db.items():
         for en_term in en_translations:
@@ -23,63 +22,49 @@ def create_reverse_dictionary(original_db):
 CN_TO_EN_DB = load_terminology_db(config.TERMINOLOGY_FILE)
 EN_TO_CN_DB = create_reverse_dictionary(CN_TO_EN_DB)
 
-# --- Core Logic ---
+# --- Core Logic (Unchanged) ---
 def detect_language(text: str) -> str:
-    """Detects if the text is primarily Chinese or English."""
     if re.search(r'[\u4e00-\u9fff]', text):
         return 'zh'
     return 'en'
 
 def find_terms_in_text(source_text, db, lang):
-    """Finds glossary terms using a smarter, longest-match-first strategy."""
     found_terms = {}
     text_to_search = source_text
-    # Sort keys by length, descending, to find "matt ink" before "matt"
     sorted_keys = sorted(db.keys(), key=len, reverse=True)
-    
     for term in sorted_keys:
-        # Use word boundaries for English to avoid matching parts of words
         pattern = r'\b' + re.escape(term) + r'\b' if lang == 'en' else re.escape(term)
-        
-        # Use re.search for case-insensitivity
         if re.search(pattern, text_to_search, re.IGNORECASE):
-            # We use the original key from the DB for consistency
-            found_terms[term] = db[term]
-            # Blank out the found term so we don't match its substrings
-            text_to_search = re.sub(pattern, " " * len(term), text_to_search, flags=re.IGNORECASE)
-            
+            match = re.search(pattern, text_to_search, re.IGNORECASE)
+            found_terms[match.group(0)] = db.get(term, db.get(term.lower()))
+            text_to_search = text_to_search.replace(match.group(0), " " * len(match.group(0)))
     return found_terms
 
-# --- The Main Pipeline Function ---
+# --- The Main Pipeline Function (with the new simplified prompt) ---
 def master_translation_pipeline(source_text: str, model, tokenizer):
     """
-    Orchestrates the translation using the final, most robust prompt.
+    Orchestrates the translation using a direct and robust prompt.
     """
     lang = detect_language(source_text)
     db = CN_TO_EN_DB if lang == 'zh' else EN_TO_CN_DB
     found_terms = find_terms_in_text(source_text, db, lang)
     
-    # --- Prompt Generation Stage ---
-    mini_glossary = "No specific terminology found."
+    mini_glossary = "No specific terminology found. Translate using your general knowledge."
     if found_terms:
         if lang == 'zh':
-            lines = [f"- The Chinese term '{zh}' MUST be translated as one of: `{', '.join(en_list)}`" for zh, en_list in found_terms.items()]
-        else: # lang == 'en'
-            lines = [f"- The English term `{en}` MUST be translated as `{zh}`" for en, zh in found_terms.items()]
+            lines = [f"- '{zh}' must be translated as one of: {en_list}" for zh, en_list in found_terms.items()]
+        else:
+            lines = [f"- '{en}' MUST be translated as '{zh}'" for en, zh in found_terms.items()]
         mini_glossary = "\n".join(lines)
 
     target_language = "English" if lang == 'zh' else "Traditional Chinese (繁體中文)"
     
-    # This prompt provides strong guidance without being overly complex
-    final_prompt = f"""You are an expert translator specializing in the printing industry. Your task is to translate the "Source Text" into fluent, high-quality {target_language}.
-Strictly follow the rules in the "Terminology Glossary" and the style in the "Examples". Your final output should only be the translation itself, with no extra notes.
+    # A new, much simpler and more direct prompt.
+    final_prompt = f"""You are an expert translator. Your task is to translate the following "Source Text" into fluent, high-quality {target_language}.
+You must strictly follow the rules in the "Terminology Glossary". Your final output must only be the translation itself, with no extra notes.
 
 **Terminology Glossary:**
 {mini_glossary}
-
-**Examples:**
-- English: "matt ink for the new printer" -> Chinese: "用於新打印機的哑光油墨"
-- Chinese: "为最终产品要求覆膜处理。" -> English: "Request lamination for the final product."
 
 **Source Text to Translate:**
 "{source_text}"
@@ -89,7 +74,6 @@ Strictly follow the rules in the "Terminology Glossary" and the style in the "Ex
     
     final_translation = call_llm(model, tokenizer, final_prompt)
         
-    # Return the found terms map for better logging
     return {
         "final_translation": final_translation,
         "found_terms_map": found_terms

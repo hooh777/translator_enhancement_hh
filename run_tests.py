@@ -1,6 +1,5 @@
 # run_tests.py
-# FINAL VERSION: A comprehensive A/B comparison tool that generates a beautified,
-# highlighted Markdown report for human review.
+# FINAL ARCHITECTURE: A clean A/B comparison tool that generates a beautified Markdown report.
 
 import json
 from datetime import datetime
@@ -13,14 +12,14 @@ import re
 from colorama import init, Fore, Style
 
 from llm_handler import setup_llm, call_llm
-from rag_system import master_translation_pipeline, detect_language, CN_TO_EN_DB, EN_TO_CN_DB
+from rag_system import master_translation_pipeline, detect_language
 
-def highlight_terms(text, glossary_terms_map, source_lang):
+def highlight_terms(text, glossary_terms_map):
     """Finds and highlights a list of terms within a body of text using Markdown backticks."""
     if not glossary_terms_map:
         return text
 
-    # Create a comprehensive list of all possible terms to highlight (both source and target)
+    # Create a comprehensive list of all possible terms to highlight
     all_terms_to_highlight = set()
     for source_term, target_translation in glossary_terms_map.items():
         all_terms_to_highlight.add(source_term)
@@ -29,20 +28,20 @@ def highlight_terms(text, glossary_terms_map, source_lang):
         else:
             all_terms_to_highlight.add(target_translation)
 
-    # Filter out any None values that might have slipped in
     all_terms_to_highlight = {t for t in all_terms_to_highlight if t}
-    
-    # Sort by length to match longer terms first (e.g., 'matt ink' before 'matt')
+    if not all_terms_to_highlight:
+        return text
+        
     sorted_terms = sorted(list(all_terms_to_highlight), key=len, reverse=True)
     
-    # Create a regex pattern to find any of the terms as whole words
-    pattern = r'\b(' + '|'.join(map(re.escape, sorted_terms)) + r')\b'
+    # Create a regex pattern that is safe and finds whole words, case-insensitive
+    pattern = r'(?i)\b(' + '|'.join(map(re.escape, sorted_terms)) + r')\b'
     
     try:
-        # Wrap matches in backticks, ignoring case for robustness
-        highlighted_text = re.sub(pattern, r'`\1`', text, flags=re.IGNORECASE)
+        # Wrap matches in backticks
+        highlighted_text = re.sub(pattern, r'`\1`', text)
     except re.error:
-        # Fallback in case a term creates a complex, invalid regex pattern
+        # Fallback for complex patterns that might fail
         highlighted_text = text
 
     return highlighted_text
@@ -51,7 +50,9 @@ def run_test_suite(test_file_path: str):
     """Loads a test file and runs a side-by-side comparison, creating a beautified Markdown report."""
     
     init(autoreset=True)
-    OK, FAIL, INFO, HEADER, RESET = Fore.GREEN, Fore.RED, Fore.CYAN, Style.BRIGHT, Style.RESET_ALL
+    INFO = Fore.CYAN
+    HEADER = Style.BRIGHT
+    RESET = Style.RESET_ALL
 
     timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
     results_dir = f"test_results_{timestamp}"
@@ -62,7 +63,7 @@ def run_test_suite(test_file_path: str):
 
     print(f"{INFO}--- Setting up the test environment ---")
     print(f"{INFO}Loading the LLM. This may take a moment...")
-    llm_model, llm_tokenizer = setup_llm()
+    llm_model, llm_tokenizer, device = setup_llm()
 
     print(f"{INFO}Loading test cases from: {test_file_path}...")
     with open(test_file_path, 'r', encoding='utf-8') as f:
@@ -98,18 +99,18 @@ def run_test_suite(test_file_path: str):
         print(f"{INFO}   -> RAG Time: {rag_duration:.2f}s | Baseline Time: {base_duration:.2f}s")
         
         # --- Highlight terms for the report ---
-        found_terms_for_highlight = rag_result_data['found_terms_map']
-        highlighted_source = highlight_terms(source_text, found_terms_for_highlight, lang)
-        highlighted_rag = highlight_terms(rag_translation, found_terms_for_highlight, lang)
-        highlighted_baseline = highlight_terms(baseline_translation, found_terms_for_highlight, lang)
+        found_terms = rag_result_data['found_terms_map']
+        highlighted_source = highlight_terms(source_text, found_terms)
+        highlighted_rag = highlight_terms(rag_translation, found_terms)
+        highlighted_baseline = highlight_terms(baseline_translation, found_terms)
 
         # --- Build Markdown Report Part for this test ---
         report_parts.append(f"## Test {i+1}/{len(test_cases)}: {test['id']}\n\n")
         report_parts.append(f"### Source Text\n> {highlighted_source}\n\n")
         
         report_parts.append("#### Glossary Terms Identified by RAG System:\n")
-        if found_terms_for_highlight:
-            for term, translation in found_terms_for_highlight.items():
+        if found_terms:
+            for term, translation in found_terms.items():
                 report_parts.append(f"- **{term}** -> `{translation}`\n")
         else:
             report_parts.append("- None\n")
@@ -125,8 +126,12 @@ def run_test_suite(test_file_path: str):
         report_parts.append(f"> {highlighted_baseline}\n\n---\n\n")
         
         # --- Stability Pause ---
+        print(f"{INFO}   Pausing and clearing cache...")
         time.sleep(1)
-        torch.mps.empty_cache()
+        if device.type == 'mps':
+            torch.mps.empty_cache()
+        elif device.type == 'cuda':
+            torch.cuda.empty_cache()
         gc.collect()
 
     # --- Final Report Generation ---
