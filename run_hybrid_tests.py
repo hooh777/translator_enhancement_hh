@@ -3,17 +3,20 @@ import json
 from datetime import datetime
 import argparse
 import time
-import torch # <-- MISSING IMPORT ADDED
-import gc    # <-- MISSING IMPORT ADDED
+import torch
+import gc
 import os
 import re
 from colorama import init, Fore, Style
 
+# --- MODIFIED IMPORTS ---
 from llm_handler import setup_llm
-from hybrid_translator import professional_translation
+from hybrid_translator import professional_translation, detect_language
+from rag_system import master_translation_pipeline
+# --- END MODIFICATION ---
 
 def run_test_suite(test_file_path: str):
-    """Loads a test file and runs the hybrid translation, creating a Markdown report."""
+    """Loads a test file and runs the translation, creating a Markdown report."""
     
     init(autoreset=True)
     INFO = Fore.CYAN
@@ -28,7 +31,7 @@ def run_test_suite(test_file_path: str):
     report_parts = []
 
     print(f"{INFO}--- Setting up the test environment ---")
-    print(f"{INFO}Loading local LLM for polishing step...")
+    print(f"{INFO}Loading local LLM...")
     llm_model, llm_tokenizer, device = setup_llm()
     print(f"{Fore.GREEN}✅ Local LLM ready. Using device: {str(device).upper()}")
 
@@ -47,13 +50,37 @@ def run_test_suite(test_file_path: str):
         print(f"\n{HEADER}{'='*15} Running Test {i+1}/{len(test_cases)}: {test['id']} {'='*15}")
         print(f"{Fore.WHITE}Source Text: {RESET}{source_text[:120]}...")
 
-        # --- Run Hybrid Translation ---
+        # --- MODIFIED SECTION: Run Translation with Strategy Selection ---
         start_time = time.perf_counter()
-        result = professional_translation(source_text, llm_model, llm_tokenizer)
+        
+        # Detect language to choose the correct translation strategy
+        lang = detect_language(source_text)
+        
+        if lang == 'en':
+            # For EN -> CN, the existing hybrid approach is effective.
+            print(f"{INFO}   -> Using Hybrid Strategy (EN->CN)...")
+            result = professional_translation(source_text, llm_model, llm_tokenizer)
+            final_translation = result.get('final_translation', 'ERROR')
+
+        else: # lang is 'zh'
+            # For CN -> EN, the RAG approach is more reliable for terminology.
+            # This directly addresses the failure seen in the test report.
+            print(f"{INFO}   -> Using RAG Strategy (CN->EN)...")
+            rag_result = master_translation_pipeline(source_text, llm_model, llm_tokenizer)
+            
+            # Adapt the RAG output to match the report's expected structure
+            final_translation = rag_result.get('final_translation', 'ERROR')
+            result = {
+                'baseline_translation': 'N/A (RAG approach used)',
+                'corrected_translation': 'N/A (RAG approach used)',
+                'final_translation': final_translation,
+                'terms_applied': rag_result.get('found_terms_map', {})
+            }
+
         end_time = time.perf_counter()
         duration = end_time - start_time
-        final_translation = result.get('final_translation', 'ERROR')
-        
+        # --- END MODIFICATION ---
+
         print(f"{INFO}   -> Total Time Taken: {duration:.2f}s")
         
         # --- Build Markdown Report Part for this test ---
