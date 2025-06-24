@@ -1,4 +1,3 @@
-# config.py
 # This file contains all the configuration settings for the project.
 
 # LLM Model Configuration# Point to the new, ultra-efficient 0.5B model
