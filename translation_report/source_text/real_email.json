@@ -1,0 +1,57 @@
+[
+  {
+    "id": "record_1",
+    "record_date": "2025-07-25",
+    "subject": null,
+    "recipient": null,
+    "sender": null,
+    "type": "Quotation Request",
+    "language_mix": [
+      "Chinese",
+      "English"
+    ],
+    "body": "  下午好!\n\n    請按附件資料報價，數量300PCS/400PCS/500PCS,5K，要求如下：\n\n  Page count: 24pg + cover\n\nCover: 16\" x 6\" white 111# Pacesetter Cover Silk\n\nText pages: 16\" x 6\" white 80# Pacesetter Text silk\n\nFinish Size: 8\" x 6\"\n\nFinishing: DIG collate, SaddleStitch, Trim\n\n\n  補充資料：\n\n    材質：封面及內頁都是90G 雙銅紙，封面過水油，內頁無表面處理。\n\n2個騎馬釘。\n\n    請提供100PCS/200PCS/300PCS/400PCS/500PCS/5K 報價"
+  },
+  {
+    "id": "record_2",
+    "record_date": "2025-07-25",
+    "subject": "大粒MAC點讀圖書報價",
+    "recipient": "William",
+    "sender": "Connie",
+    "type": "Quotation Request with Update",
+    "language_mix": [
+      "Chinese",
+      "English"
+    ],
+    "body": "Hi William,\n\n我有套圖書想請貴司報價, 資料如下, 謝謝\n\n點讀圖書（全套12冊）\n\n\n規格1:\n\n封面: 210G粉咭/4pp/4C+4C/雙面加光油    *封面的圖要加針線(可用手沿線撕開) **12本書的封面設計圖不同\n\n內頁: 157G粉紙/32pp/4C+4C/雙面加光油\n\n尺寸: A4 – 210*297MM/騎馬釘\n\n貼紙頁 : A3/4C+0/可重複貼貼紙    **12本書的貼紙設計圖不同\n\n \n\n規格2:\n\n封面+內頁: 210G粉咭/4+32pp/4C+4C/雙面加光油    *封面的圖要加針線(可用手沿線撕開) **12本書的封面圖不同\n\n尺寸: A4 – 210*297MM/騎馬釘    **12本書的貼紙設計圖不同\n\n \n\n規格3:\n\n封面+內頁: 250G粉咭/4+32pp/4C+4C/雙面加光油    *封面的圖要加針線(可用手沿線撕開) **12本書的封面圖不同\n\n尺寸: A4 – 210*297MM/騎馬釘    **12本書的貼紙設計圖不同\n\n \n\n印刷數量: 3000套\n\n包裝方法:暫定收縮（shrink wrap）\n\n \n\nBest regards,\n\nConnie\n\n\nHi William,\n\nWe have updated the details, please quote us the price base on the following:\n\n\n更正\n\n\n現祇需報1款規格, 更新資料如下:\n\n\n騎馬釘直度A4點讀圖書套裝:  \n\n尺寸：210mm (W) x 297mm(H) (打開420mm (W) x 297mm(H))\n\n規格：每款頁數32+4pp，每套12款\n\n物料：封面250g單粉卡；內頁157g粉紙\n顏色：4C+4C\n加工：封面單面光膠、燙金、一條semi diecut 針線(約11x18cm) \n\n \n\n另每本中間加可點讀貼紙：\n\n尺寸：210mm (W) x 297mm(H) (打開420mm (W) x 297mm(H))\n\n規格：每本10pp（即A3X5），刀模不同\n\n物料：85gsm 光面貼紙\n顏色：4C+0\n\n \n\n書和貼紙請分開報價, 方便調整貼紙張數. 數量請報3000套，謝謝。\n\n \n\nBest regards,\n\nConnie"
+  },
+  {
+    "id": "record_3",
+    "record_date": "2025-07-25",
+    "subject": "精裝書報價",
+    "recipient": [
+      "Steve",
+      "Joe"
+    ],
+    "sender": "Catherine",
+    "type": "Quotation Request with Clarification",
+    "language_mix": [
+      "Chinese",
+      "English"
+    ],
+    "body": "Hi Steve,\n\n \n\n麻煩幫忙報做精裝書價錢,\n\n \n\n內文尺寸 240mm(w) x 290mm(h)\n\n皮殼 興泰行布料 裱灰板3mm 及 燙金 (底面燙字)\n\n內文200gsm花紋紙\n\n襯紙150 gsm花紋紙\n\n運通自來模書鴻興負責做皮殼、燙金及上殼\n\n數量1000本 / 2000本\n\n \n\nThanks\n\nCatherine\n\n\nDear Joe,\n\n\n內文128pp, 大約1吋厚\n\n\nThanks\n\nCatherine"
+  },
+  {
+    "id": "record_4",
+    "record_date": "2025-07-25",
+    "subject": null,
+    "recipient": "Alice",
+    "sender": "Teresa",
+    "type": "Quotation Request",
+    "language_mix": [
+      "English",
+      "Chinese"
+    ],
+    "body": "Alice,\n\n\nPlease quote : 10k, 20k, 30k & 50k\n\n\n250gsm e-flute tuck in box (FSC)\n\nSize:  380 x 240 x 145mm\n\n4C+UV\n\n \n\nInst sheet\n\nA5 size x 4 (FSC)\n\n128gsm artpaper\n\n1C+1C,双面过油\n\n \n\nCard\n\n250gsm e-flute (FSC)\n\n350x720mm\n\n4C+UV\n\n \n\nThanks,\n\nTeresa"
+  }
+]

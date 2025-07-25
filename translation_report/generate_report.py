@@ -6,9 +6,9 @@ import os
 
 # Define the names of the input and output files.
 GLOSSARY_FILE = "glossary.json"
-SOURCE_EMAILS_FILE = "./source_text/confusing_case.json"
-TRANSLATION_FILE = "./translated_text/grok_translations_confusing_with_terms.txt"
-OUTPUT_FILE = "grok_report_confusing_with_terms.md"
+SOURCE_EMAILS_FILE = "./source_text/real_email.json"
+TRANSLATION_FILE = "./translated_text/grok_real_email_translations.txt"
+OUTPUT_FILE = "grok_report_real_email_translations.md"
 
 # --- DATA LOADING FUNCTIONS ---
 
