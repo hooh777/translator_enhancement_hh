@@ -1,0 +1,62 @@
+[
+  {
+    "id": "case_21",
+    "scenario": "Ambiguous use of a finishing term",
+    "subject": "報價 - 新盒子",
+    "body": "Hi, 請為 2000 個新盒子報價，尺寸 15x10x5cm。材質用350g的白卡纸。我們想要一種保護性塗層，請直接報上光的價格，要那種標準的就好。謝謝。"
+  },
+  {
+    "id": "case_22",
+    "scenario": "Conflating multiple similar 'matte' finishes",
+    "subject": "Re: 報價問題",
+    "body": "Steve, 關於上次那個精装本的報價。封面我們最後決定要啞光效果。所以請用哑光油墨印刷，然後再做一层哑光涂层。哦對了，為了耐用，還是用哑光覆膜吧。請更新價格。"
+  },
+  {
+    "id": "case_23",
+    "scenario": "Using a book term to describe a box",
+    "subject": "URGENT - high-end box quote",
+    "body": "Alice, we need a quote for 500 high-end gift boxes. They need to be very rigid, basically like a 精装本. The outside should be 157gsm art paper 裱 3mm 灰板. Let me know the cost ASAP."
+  },
+  {
+    "id": "case_24",
+    "scenario": "Contradictory product descriptions",
+    "subject": "儿童书报价请求",
+    "body": "你好，我想做一款给小孩子的纸板书，要非常厚实耐用。规格如下：\n- 尺寸: 6x6英寸\n- 封面: 250g铜版纸，平装封面\n- 内页: 105g书纸，32页\n- 数量: 5000本\n请问这样做一本硬板书要多少钱？"
+  },
+  {
+    "id": "case_25",
+    "scenario": "Vague instructions for a core process",
+    "subject": "加工費",
+    "body": "Hi, 我司會提供一批印刷好的157g铜版纸。尺寸是A3。請幫我們把它裱在2mm的板上。請報5000張的加工費。謝謝。"
+  },
+  {
+    "id": "case_26",
+    "scenario": "Jumbled request for multiple different products",
+    "subject": "幾個東西的報價",
+    "body": "Connie, 麻煩報幾個價。我們要做一個彩盒，20x20x8cm，用e-flute。還有一批紙袋，大概30cm高，用白卡纸。最後還需要一個書套，給我們現有的書用的，尺寸是15x22x3cm。封面都要上光。數量都先報1000個。"
+  },
+  {
+    "id": "case_27",
+    "scenario": "Informal language and typos obscuring technical needs",
+    "subject": "那個...盒子的報價",
+    "body": "hey, 之前說的那個書盒，想改一下。外面那個殼...就是那個套筒，我們想用好一點的纸板。表面處理...弄個燙幻彩，要閃一點的。數量不變，快點報個新價錢plz。"
+  },
+  {
+    "id": "case_28",
+    "scenario": "Contradictory material and aesthetic request",
+    "subject": "Quote for eco-friendly packaging",
+    "body": "Hi Team, Please quote for 5,000 tuck-in boxes, size 10x10x10cm. For the material, please use a thick 白卡纸, maybe 400gsm. But for the look, we want a very natural, brown, recycled paper aesthetic. What can you suggest?"
+  },
+  {
+    "id": "case_29",
+    "scenario": "Using non-standard units for a technical spec",
+    "subject": "關於紙張厚度",
+    "body": "William, 我們想印一批傳單，A5尺寸，雙面彩色。紙張請用150克的铜版纸。就是那種...感覺像80磅text weight那樣的，你懂吧？報價3000和5000張。"
+  },
+  {
+    "id": "case_30",
+    "scenario": "Using two different glossary terms for the same item",
+    "subject": "保護盒報價",
+    "body": "您好，我們有一批精裝書需要配一個外盒。請為這個書盒報價。書本尺寸21x30x4cm。這個套筒需要用硬度高的灰板來做，外面裱有紋路的紙。請報1000個的價格。"
+  }
+]

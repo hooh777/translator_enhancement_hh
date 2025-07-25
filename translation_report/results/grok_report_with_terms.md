@@ -1,13 +1,41 @@
 # Translation Terminology Report (Grok Analysis)
 
+## Overall Metrics Summary
+
+| Case | Terminology Hit Rate | Readability Score (Interpretation) |
+| :--- | :--- | :--- |
+| Case 1 | 75.0% (3/4) | 61.28 (Standard) |
+| Case 2 | 85.7% (6/7) | 51.32 (Fairly Difficult) |
+| Case 3 | 100.0% (4/4) | 68.09 (Standard) |
+| Case 4 | 75.0% (6/8) | 38.24 (Difficult) |
+| Case 5 | 100.0% (3/3) | 55.98 (Fairly Difficult) |
+| Case 6 | 100.0% (1/1) | 44.06 (Difficult) |
+| Case 7 | 83.3% (5/6) | 55.69 (Fairly Difficult) |
+| Case 8 | 100.0% (4/4) | 50.9 (Fairly Difficult) |
+| Case 9 | 100.0% (3/3) | 61.09 (Standard) |
+| Case 10 | 75.0% (3/4) | 70.67 (Fairly Easy) |
+| Case 11 | 100.0% (3/3) | 56.55 (Fairly Difficult) |
+| Case 12 | 100.0% (2/2) | 59.63 (Fairly Difficult) |
+| Case 13 | 100.0% (6/6) | 68.52 (Standard) |
+| Case 14 | 100.0% (3/3) | 56.51 (Fairly Difficult) |
+| Case 15 | 100.0% (1/1) | 69.11 (Standard) |
+| Case 16 | 100.0% (2/2) | 40.41 (Difficult) |
+| Case 17 | 83.3% (5/6) | 29.15 (Very Difficult) |
+| Case 18 | 100.0% (2/2) | 65.47 (Standard) |
+| Case 19 | 83.3% (5/6) | 49.52 (Difficult) |
+| Case 20 | 80.0% (4/5) | 77.13 (Fairly Easy) |
+| **Average** | **92.0%** | **56.5 (Standard)** |
+
+<hr>
+
 ## Case 1: Quotation request for a color box with special coating
 
 ### Terminology Analysis Table
 
 | Source Term (原文字詞) | Approved English (術語庫) | Grok's Translation | Matches Term Base? |
 | :--- | :--- | :--- | :--- |
-| `水性亮光油墨` | `water-based gloss ink` | N/A | ❌ Mismatch / Not Found |
-| `克铜版纸` | `gsm art paper`, `gsm coated paper` | `gsm coated paper` | ✅ Match |
+| `水性亮光油墨` | `water-based gloss ink` | `water-based gloss ink` | ✅ Match |
+| `克铜版纸` | `gsm art paper`, `gsm coated paper` | `gsm art paper` | ✅ Match |
 | `彩盒` | `color box` | `color box` | ✅ Match |
 | `裱` | `laminating` | N/A | ❌ Mismatch / Not Found |
 
@@ -36,25 +64,23 @@ David
 ### Grok's Translation with Highlights
 
 ```text
-// Grok's Translation for Case 1
+Subject: Quote Request: New Game **color box**
 
-Case 01: Quotation Request for **color box** with Special Coating
+Body:
 
-Subject: Quotation Request for New Game **color box**
+Hi Team,
 
-Dear Team,
-
-Please provide a quotation for our new product based on the following specifications, with target quantities of 5,000 and 10,000 units:
+Please provide a quotation for our new product based on the following specifications, with target quantities of 5,000 and 10,000 units.
 
 Product Type: **color box**
 Dimensions: 220mm x 150mm x 40mm
-Material: 300 **gsm coated paper** mounted on E-flute corrugated board
-Printing: 4-color process (4C + 0C)
-Finishing: Glossy aqueous coating overall, with matte ink on the logo for a contrasting effect
-Packaging: 50 units per carton, wrapped in shrink film
-Please confirm the lead time for sampling and the production schedule for the full order.
+Material: 300 **gsm art paper** laminated onto E-flute corrugated board
+Printing: 4C + 0C
+Surface Finishing: Overall **water-based gloss ink**, with the logo area using matte ink for a contrasting effect.
+Packaging: 50 units per carton, packed with shrink wrap.
+Please advise on the lead time for sampling and the production cycle for bulk orders. Thank you!
 
-Best regards,
+Best,
 
 David
 ```
@@ -68,12 +94,12 @@ David
 | Source Term (原文字詞) | Approved English (術語庫) | Grok's Translation | Matches Term Base? |
 | :--- | :--- | :--- | :--- |
 | `哑光` | `matt`, `matte` | `matte` | ✅ Match |
-| `哑光覆膜` | `matte laminated`, `matt laminated` | N/A | ❌ Mismatch / Not Found |
-| `灰板` | `greyboard` | N/A | ❌ Mismatch / Not Found |
+| `哑光覆膜` | `matte laminated`, `matt laminated` | `matte laminated` | ✅ Match |
+| `灰板` | `greyboard` | `greyboard` | ✅ Match |
 | `裱` | `laminating` | N/A | ❌ Mismatch / Not Found |
 | `燙幻彩` | `holographic foil stamping` | `holographic foil stamping` | ✅ Match |
 | `書紙` | `book paper` | `book paper` | ✅ Match |
-| `書套` | `jacket` | N/A | ❌ Mismatch / Not Found |
+| `書套` | `jacket` | `jacket` | ✅ Match |
 
 ---
 
@@ -99,24 +125,22 @@ Catherine
 ### Grok's Translation with Highlights
 
 ```text
-// Grok's Translation for Case 2
+Subject: RE: Hardcover Book Quotation - Specification Update
 
-Case 02: Re-quote Request for Hardcover Book After Specification Update
+Body:
 
-Subject: Re: Hardcover Book Quotation - Specification Update
+Hi Steve,
 
-Dear Steve,
+Thank you for your previous quotation. The client has made design changes, so please provide a revised quotation based on the updated specifications.
 
-Thank you for your previous quotation. The client has made design revisions, and we kindly request a revised quotation based on the updated specifications:
-
-Text Page Dimensions: 240mm (W) x 290mm (H) - unchanged
-Case Material: Changed to 157 gsm **matte** coated paper mounted on 3mm gray board
-Finishing: **matte** lamination on the case, with **holographic foil stamping** on the logo
+Text Block Dimensions: 240mm (W) x 290mm (H) - unchanged
+Case: Changed to 157 gsm **matte** coated paper laminated onto 3mm **greyboard**.
+Surface Finishing: The case requires **matte** laminated finish and **holographic foil stamping** for the logo.
 Endpaper: 150 gsm **book paper**
-Quantity: 1,500 and 3,000 copies
-Additionally, the client has inquired whether an independent slipcase can be provided for the first 50 copies. If feasible, please provide a separate quotation for the slipcase.
+Quantity: 1,500 / 3,000 copies
+Additionally, the client is inquiring whether an independent book **jacket** can be provided for the first 50 copies. If feasible, please provide a separate quotation for this.
 
-Thank you,
+Thanks,
 
 Catherine
 ```
@@ -129,10 +153,10 @@ Catherine
 
 | Source Term (原文字詞) | Approved English (術語庫) | Grok's Translation | Matches Term Base? |
 | :--- | :--- | :--- | :--- |
-| `上光` | `varnishing`, `coating` | N/A | ❌ Mismatch / Not Found |
-| `白卡纸` | `white card paper` | N/A | ❌ Mismatch / Not Found |
+| `上光` | `varnishing`, `coating` | `varnishing` | ✅ Match |
+| `白卡纸` | `white card paper` | `white card paper` | ✅ Match |
 | `紙袋` | `paper bag` | `paper bag` | ✅ Match |
-| `卡` | `card` | N/A | ❌ Mismatch / Not Found |
+| `卡` | `card` | `card` | ✅ Match |
 
 ---
 
@@ -159,25 +183,23 @@ Jack
 ### Grok's Translation with Highlights
 
 ```text
-// Grok's Translation for Case 3
+Subject: URGENT: **paper bag** Quotation - Urgent for Trade Show
 
-Case 03: Urgent Order for Paper Bags for a Trade Show
+Body:
 
-Subject: Urgent: **paper bag** Quotation for Trade Show
+Hi Alice,
 
-Dear Alice,
+We urgently need a batch of paper bags for next month’s trade show. Please provide a quotation as soon as possible.
 
-We urgently require paper bags for an upcoming trade show next month. Please provide a quotation as soon as possible:
-
-Product Type: **paper bag**
+Type: **paper bag**
 Dimensions: 30cm (H) x 25cm (W) x 10cm (D)
-Material: 210 gsm white cardstock
-Printing: 4-color process (4C + 0C), using matte ink
-Finishing: Matte lamination, with cotton rope handles
-Quantity: 500 and 1,000 units
-Given the tight timeline, please confirm the earliest possible delivery date. If lamination is not feasible within the timeline, please provide pricing without lamination.
+Material: 210 gsm **white **card** paper**
+Printing: 4C + 0C, using matte ink.
+Finishing: Matte laminated, with cotton rope handles.
+Quantity: 500 / 1,000 units
+Due to the tight timeline, please confirm the earliest possible delivery date. If lamination is not feasible within the timeline, what would be the cost without **varnishing**?
 
-Thank you,
+Thank you!
 
 Jack
 ```
@@ -192,11 +214,11 @@ Jack
 | :--- | :--- | :--- | :--- |
 | `哑光` | `matt`, `matte` | `matte` | ✅ Match |
 | `哑光涂层` | `matt coating`, `matte coating` | `matte coating` | ✅ Match |
-| `灰板` | `greyboard` | N/A | ❌ Mismatch / Not Found |
-| `白卡纸` | `white card paper` | N/A | ❌ Mismatch / Not Found |
-| `撲克油` | `poker varnishing`, `Poker Coating` | N/A | ❌ Mismatch / Not Found |
+| `灰板` | `greyboard` | `greyboard` | ✅ Match |
+| `白卡纸` | `white card paper` | `white card paper` | ✅ Match |
+| `撲克油` | `poker varnishing`, `Poker Coating` | `poker varnishing` | ✅ Match |
 | `裱` | `laminating` | N/A | ❌ Mismatch / Not Found |
-| `卡` | `card` | N/A | ❌ Mismatch / Not Found |
+| `卡` | `card` | `card` | ✅ Match |
 | `硬板书` | `boardbook` | N/A | ❌ Mismatch / Not Found |
 
 ---
@@ -227,26 +249,24 @@ Emily
 ### Grok's Translation with Highlights
 
 ```text
-// Grok's Translation for Case 4
+Subject: Inquiry Regarding Board Book Material
 
-Case 04: Inquiry About Materials for a Board Book
+Body:
 
-Subject: Inquiry Regarding Board Book Material Options
+Hi William,
 
-Dear William,
+We are planning a new board book and have some questions about materials:
 
-We are planning a new board book and have questions regarding material choices:
+Our design consists of 12 pages, using 400 gsm **white **card** paper** laminated together. What thickness of **greyboard** do you recommend for the lining to ensure the book’s rigidity and durability?
 
-For a 12-page design using 400 gsm white cardstock laminated together, what thickness of gray board do you recommend for the inner lining to ensure durability and rigidity?
+Additionally, if the cover is treated with **poker varnishing** compared to a standard **matte** coating, approximately how much would the cost increase?
 
-Additionally, if the cover uses poker oil coating instead of standard **matte** coating, how much would the cost increase compared to the standard option?
-
-Please provide a quotation for 3,000 and 5,000 copies based on the following tentative specifications:
+Please provide a quotation for 3,000 / 5,000 copies based on the following tentative specifications:
 
 Dimensions: 8" x 8"
 Pages: 12 pages (6 spreads)
-Material: 400 gsm white cardstock laminated
-Printing: 4-color process (4C/4C)
+Material: 400 gsm **white **card** paper** laminated together
+Printing: 4C/4C
 We look forward to your professional recommendations.
 
 Regards,
@@ -262,8 +282,8 @@ Emily
 
 | Source Term (原文字詞) | Approved English (術語庫) | Grok's Translation | Matches Term Base? |
 | :--- | :--- | :--- | :--- |
-| `灰板` | `greyboard` | N/A | ❌ Mismatch / Not Found |
-| `上光` | `varnishing`, `coating` | `coating` | ✅ Match |
+| `灰板` | `greyboard` | `greyboard` | ✅ Match |
+| `上光` | `varnishing`, `coating` | `varnishing` | ✅ Match |
 | `書紙` | `book paper` | `book paper` | ✅ Match |
 
 ---
@@ -296,31 +316,29 @@ Ben
 ### Grok's Translation with Highlights
 
 ```text
-// Grok's Translation for Case 5
+Subject: Quote Request: Multi-language Instruction Sheet & Packaging
 
-Case 05: Quote for Multi-Language Instruction Sheets and Packaging
+Body:
 
-Subject: Quotation Request: Multi-Language Instruction Sheets and Packaging
+Hi Teresa,
 
-Dear Teresa,
-
-Please provide a quotation for the following items with quantities of 8,000 and 16,000 units:
+Please provide a quotation for the following items. Quantities: 8,000 and 16,000 units.
 
 Item 1: Tuck-in Box
 
-Material: 350 gsm gray board
-Dimensions: 180mm x 100mm x 50mm
-Printing: 4-color process (4C + 0C)
-Finishing: Glossy **coating**
-Item 2: Instruction Sheets (3 Languages)
+Material: 350 gsm **greyboard**
+Size: 180 x 100 x 50mm
+Printing: 4C + 0C
+Finishing: **varnishing**
+Item 2: Instruction Sheets (x3 languages)
 
-Dimensions: A4, folded to A6
+Size: A4, folded to A6
 Material: 105 gsm **book paper**
-Printing: 1-color process (1C + 1C)
-Note: Three versions with different content, with quantities evenly distributed
-Please provide separate quotations for each item.
+Printing: 1C + 1C
+Note: Three versions with different content, with quantities evenly distributed.
+Please provide separate quotations for the two items. Thank you.
 
-Thank you,
+Thanks,
 
 Ben
 ```
@@ -357,23 +375,21 @@ Connie
 ### Grok's Translation with Highlights
 
 ```text
-// Grok's Translation for Case 6
+Subject: Re-order Request & Partial Shipment Inquiry
 
-Case 06: Re-order Request with Inquiry About Partial Shipment
-
-Subject: Re-order Request and Partial Shipment Inquiry
+Body:
 
 Dear Joe,
 
-The market response to our previous order (PO#20240512) has been excellent, and we urgently need to place a re-order.
+The market response to our last order (PO#20240512) has been excellent, and we urgently need to place a re-order.
 
 Please provide a quotation for 5,000 units of the following product:
 
-Product: **hardcover** Book
+Product: **hardcover** book
 Specifications: Identical to PO#20240512
-Additionally, due to urgent market demand, is it possible to arrange partial shipment of 2,000 copies upon completion, with the remaining 3,000 copies following the standard schedule? If feasible, please provide the associated logistics costs.
+Additionally, due to urgent market demand, is it possible to arrange partial shipment of 2,000 copies upon completion, with the remaining 3,000 copies completed per the standard process? If feasible, please provide the associated logistics costs.
 
-Thank you,
+Thanks a lot,
 
 Connie
 ```
@@ -387,9 +403,9 @@ Connie
 | Source Term (原文字詞) | Approved English (術語庫) | Grok's Translation | Matches Term Base? |
 | :--- | :--- | :--- | :--- |
 | `哑光` | `matt`, `matte` | `matte` | ✅ Match |
-| `哑光覆膜` | `matte laminated`, `matt laminated` | N/A | ❌ Mismatch / Not Found |
-| `灰板` | `greyboard` | N/A | ❌ Mismatch / Not Found |
-| `亞克力板` | `acrylic board`, `acrylic sheet` | `acrylic board` | ✅ Match |
+| `哑光覆膜` | `matte laminated`, `matt laminated` | `matte laminated` | ✅ Match |
+| `灰板` | `greyboard` | `greyboard` | ✅ Match |
+| `亞克力板` | `acrylic board`, `acrylic sheet` | `acrylic sheet` | ✅ Match |
 | `裱` | `laminating` | N/A | ❌ Mismatch / Not Found |
 | `燙幻彩` | `holographic foil stamping` | `holographic foil stamping` | ✅ Match |
 
@@ -421,25 +437,23 @@ Michael
 ### Grok's Translation with Highlights
 
 ```text
-// Grok's Translation for Case 7
+Subject: Quote: Slipcase with **acrylic sheet**
 
-Case 07: Quote for a Slipcase with **acrylic board** and Special Foil Stamping
+Body:
 
-Subject: Quotation for Slipcase with **acrylic board**
+Hi Steve,
 
-Dear Steve,
+Please provide a quotation for a complex slipcase design.
 
-Please provide a quotation for a complex slipcase with the following specifications:
-
-Product Type: Slipcase
+Type: Slipcase
 Book Dimensions: 150mm x 220mm x 30mm
-Material: 2mm gray board mounted with 128 gsm art paper
+Material: 2mm **greyboard** laminated with 128 gsm art paper
 Finishing:
-**matte** lamination on the surface
+**matte** laminated surface
 **holographic foil stamping** on the front
-A 3mm thick transparent acrylic panel (50mm x 100mm) embedded on the side
-Quantity: 500 and 1,000 units
-Are there color options for **holographic foil stamping** beyond standard rainbow? Can the edges of the acrylic panel be polished?
+A 3mm thick transparent **acrylic sheet** (50mm x 100mm) embedded on the side.
+Quantity: 500 / 1,000 units
+Are there color options for **holographic foil stamping** beyond the standard rainbow effect? Can the edges of the **acrylic sheet** be polished?
 
 Best regards,
 
@@ -454,9 +468,9 @@ Michael
 
 | Source Term (原文字詞) | Approved English (術語庫) | Grok's Translation | Matches Term Base? |
 | :--- | :--- | :--- | :--- |
-| `上光` | `varnishing`, `coating` | `coating` | ✅ Match |
-| `白卡纸` | `white card paper` | N/A | ❌ Mismatch / Not Found |
-| `撲克油` | `poker varnishing`, `Poker Coating` | N/A | ❌ Mismatch / Not Found |
+| `上光` | `varnishing`, `coating` | `varnishing` | ✅ Match |
+| `白卡纸` | `white card paper` | `white card paper` | ✅ Match |
+| `撲克油` | `poker varnishing`, `Poker Coating` | `poker varnishing` | ✅ Match |
 | `卡` | `card` | `card` | ✅ Match |
 
 ---
@@ -487,28 +501,26 @@ Fiona
 ### Grok's Translation with Highlights
 
 ```text
-// Grok's Translation for Case 8
+Subject: Poker Cards Quote
 
-Case 08: Quotation Request for Poker Cards with Different Packaging Options
+Body:
 
-Subject: Poker **card** Quotation
-
-Dear Team,
+Hi Team,
 
 Please provide a quotation for standard poker cards with the following specifications:
 
 **card** Quantity: 54 cards per deck
-Dimensions: 63mm x 88mm
+Dimensions: 63 x 88mm
 Material: 300 gsm blue core paper
-Printing: 4-color process (4C + 4C)
-Finishing: Poker oil **coating** on both sides
-Packaging Options:
-Option A: Standard tuck box, 250 gsm white cardstock, 4-color printing, glossy **coating**
-Option B: Shrink film packaging, no paper box
-Quantity: 3,000 and 5,000 decks
+Printing: 4C + 4C
+Surface Finishing: Poker **varnishing** on both sides
+Packaging:
+Option A: Standard tuck box, 250 gsm **white **card** paper**, 4C printing, **varnishing**.
+Option B: Shrink wrap packaging, without a paper box.
+Quantity: 3,000 / 5,000 decks
 Please provide separate quotations for Options A and B.
 
-Thank you,
+Thanks,
 
 Fiona
 ```
@@ -551,25 +563,25 @@ Leo
 ### Grok's Translation with Highlights
 
 ```text
-// Grok's Translation for Case 9
-
-Case 09: Inquiry About Eco-Friendly Material Options for a **color box**
-
 Subject: Inquiry for Eco-Friendly Options for **color box**
 
-Dear Alice,
+Body:
 
-We are planning a new **color box** and wish to explore eco-friendly material options:
+Hi Alice,
 
-Dimensions: 200mm x 200mm x 80mm
-Current Specification: 300 gsm art paper with **matte** lamination
-Please provide a quotation for 5,000 units based on the current specification. Additionally, please provide alternative quotations for:
+We are planning a new **color box** and would like to explore eco-friendly options.
 
-Using FSC-certified paper
-Replacing **matte** lamination with water-based **matte** coating
-We would like to compare cost and appearance. If available, please send samples of the water-based **matte** coating finish.
+Size: 200 x 200 x 80mm
+Current Specification: 300 gsm art paper with **matte** laminated finish.
+Could you please quote the price for the current specification for 5,000 units?
 
-Best regards,
+Additionally, please provide alternative quotations for:
+
+Using FSC-certified paper.
+Replacing **matte** lamination with a water-based **matte** coating.
+We want to compare the cost and appearance. Could you send samples of the **matte** coating finish if available?
+
+Best,
 
 Leo
 ```
@@ -608,19 +620,17 @@ Sarah
 ### Grok's Translation with Highlights
 
 ```text
-// Grok's Translation for Case 10
-
-Case 10: Feedback on Sample Quality for a Board Book Order
-
 Subject: Feedback on Sample for Order #S20240608
 
-Dear William,
+Body:
+
+Hi William,
 
 We have received the board book sample, and the overall quality is good, but there are two minor issues:
 
-One page has slight air bubbles in the inner lining, which must be avoided in full production.
-The cover’s **matte** coating appears thin, with uneven gloss in some areas. We prefer a deeper **matte** effect. Is it possible to use **matte** ink or increase the coating thickness?
-Please confirm whether these issues can be resolved in full production. We will confirm the order upon your response.
+One page’s lining has slight air bubbles, which must be avoided in bulk production.
+The cover’s **matte** coating feels slightly thin, with uneven reflection in some areas. We prefer a deeper **matte** effect. Is it possible to use **matte** ink or increase the coating thickness?
+Please confirm whether these issues can be resolved in bulk production. We will confirm the order upon your response.
 
 Regards,
 
@@ -635,8 +645,8 @@ Sarah
 
 | Source Term (原文字詞) | Approved English (術語庫) | Grok's Translation | Matches Term Base? |
 | :--- | :--- | :--- | :--- |
-| `灰板` | `greyboard` | N/A | ❌ Mismatch / Not Found |
-| `裱` | `laminating` | N/A | ❌ Mismatch / Not Found |
+| `灰板` | `greyboard` | `greyboard` | ✅ Match |
+| `裱` | `laminating` | `laminating` | ✅ Match |
 | `硬封面` | `hardcover` | `hardcover` | ✅ Match |
 
 ---
@@ -664,23 +674,21 @@ Peter
 ### Grok's Translation with Highlights
 
 ```text
-// Grok's Translation for Case 11
+Subject: Quote Request: CMT (Cut, Make, Trim) Processing
 
-Case 11: Request for a Quote on Processing Fees Only (CMT)
+Body:
 
-Subject: Quotation Request for Cut, Make, Trim (CMT) Services
+Hi Steve,
 
-Dear Steve,
+Our company will supply the primary materials. Please provide a quotation for the following processing services only.
 
-We will provide the primary materials and request a quotation for the following processing services only:
-
-Product: **hardcover** Notebook
+Product: **hardcover** notebook
 Services:
-Mounting: Laminate our provided cover paper onto 2.5mm gray board
-Foil Stamping: Apply gold foil stamping to the logo on the front and back cover
-Binding: Assemble our provided text pages with the cover
+**laminating**: Mount our supplied cover paper onto 2.5mm **greyboard**.
+Foil Stamping: Apply foil stamping for the logo on the front and back covers.
+Binding: Assemble our supplied text pages with the cover.
 Quantity: 2,000 units
-Materials will be delivered to your factory next Monday. Please provide a quotation for processing fees only.
+The materials will be delivered to your factory next Monday. Please quote the processing fees only.
 
 Thank you,
 
@@ -695,7 +703,7 @@ Peter
 
 | Source Term (原文字詞) | Approved English (術語庫) | Grok's Translation | Matches Term Base? |
 | :--- | :--- | :--- | :--- |
-| `水性亮光油墨` | `water-based gloss ink` | N/A | ❌ Mismatch / Not Found |
+| `水性亮光油墨` | `water-based gloss ink` | `water-based gloss ink` | ✅ Match |
 | `書紙` | `book paper` | `book paper` | ✅ Match |
 
 ---
@@ -726,28 +734,26 @@ Laura
 ### Grok's Translation with Highlights
 
 ```text
-// Grok's Translation for Case 12
+Subject: Quotation Comparison: Different Paper Weights for **book paper**
 
-Case 12: Quotation Comparison for Different Paper Weights
+Body:
 
-Subject: Quotation Comparison for Different Paper Weights
+Hi Team,
 
-Dear Team,
-
-Please provide quotations for a magazine, comparing the costs of different paper weights:
+Please provide quotations for a magazine, comparing the costs of different paper weights.
 
 Dimensions: A4
 Pages: 64 pages + 4-page cover
-Binding: Saddle stitching
-Printing: 4-color process (4C + 4C)
-Please provide quotations for the following specifications (quantities of 3,000 and 5,000):
+Binding: Saddle stitch
+Printing: 4C + 4C
+Please provide quotations for the following three specifications (quantities: 3,000 / 5,000):
 
-Spec 1: Cover: 200 gsm coated paper; Text: 128 gsm coated paper
-Spec 2: Cover: 157 gsm coated paper; Text: 105 gsm coated paper
-Spec 3: Cover and Text: 120 gsm **book paper**
-All specifications require a glossy aqueous coating on the cover.
+Spec 1: Cover: 200 gsm coated paper; Text: 128 gsm coated paper.
+Spec 2: Cover: 157 gsm coated paper; Text: 105 gsm coated paper.
+Spec 3: Cover and Text: 120 gsm **book paper**.
+All specifications require the cover to be finished with **water-based gloss ink**.
 
-Thank you,
+Thanks,
 
 Laura
 ```
@@ -762,8 +768,8 @@ Laura
 | :--- | :--- | :--- | :--- |
 | `哑光` | `matt`, `matte` | `matte` | ✅ Match |
 | `哑光涂层` | `matt coating`, `matte coating` | `matte coating` | ✅ Match |
-| `白卡纸` | `white card paper` | N/A | ❌ Mismatch / Not Found |
-| `卡` | `card` | N/A | ❌ Mismatch / Not Found |
+| `白卡纸` | `white card paper` | `white card paper` | ✅ Match |
+| `卡` | `card` | `card` | ✅ Match |
 | `平装封面` | `paperback` | `paperback` | ✅ Match |
 | `套筒` | `sleeve` | `sleeve` | ✅ Match |
 
@@ -798,33 +804,31 @@ Tom
 ### Grok's Translation with Highlights
 
 ```text
-// Grok's Translation for Case 13
+Subject: Quote: **paperback** with **sleeve**
 
-Case 13: Quote for a **paperback** Book with an Outer **sleeve**
+Body:
 
-Subject: Quotation for **paperback** with **sleeve**
+Hi Alice,
 
-Dear Alice,
-
-Please provide a quotation for a **paperback** book with an outer **sleeve**:
+Please provide a quotation for a **paperback** book with an outer **sleeve**.
 
 Book Specifications:
 
 Type: **paperback**
-Dimensions: 148mm x 210mm
-Cover: 250 gsm art paper, 4-color printing (4C + 0C), **matte** lamination
-Text: 240 pages, 80 gsm book paper, 1-color printing (1C + 1C)
+Size: 148 x 210mm
+Cover: 250 gsm art paper, 4C + 0C, **matte** laminated.
+Text: 240 pages, 80 gsm book paper, 1C + 1C.
 **sleeve** Specifications:
 
-Type: Outer **sleeve**
-Material: 250 gsm white cardstock
-Printing: 4-color process (4C + 0C)
+Type: **sleeve**
+Material: 250 gsm **white **card** paper**
+Printing: 4C + 0C
 Finishing: **matte** coating
-Quantity: 3,000 and 5,000 sets
+Quantity: 3,000 / 5,000 sets.
 
 Please provide separate prices for the book and the **sleeve**.
 
-Best regards,
+Best,
 
 Tom
 ```
@@ -837,7 +841,7 @@ Tom
 
 | Source Term (原文字詞) | Approved English (術語庫) | Grok's Translation | Matches Term Base? |
 | :--- | :--- | :--- | :--- |
-| `白卡纸` | `white card paper` | N/A | ❌ Mismatch / Not Found |
+| `白卡纸` | `white card paper` | `white card paper` | ✅ Match |
 | `紙卡` | `paper card` | `paper card` | ✅ Match |
 | `卡` | `card` | `card` | ✅ Match |
 
@@ -865,22 +869,20 @@ Jessica
 ### Grok's Translation with Highlights
 
 ```text
-// Grok's Translation for Case 14
+Subject: **paper **card**** Quotation and Die-cut Inquiry
 
-Case 14: Inquiry About a **paper **card**** with a Complex Die-Cut Shape
+Body:
 
-Subject: Quotation and Die-Cut Inquiry for **paper **card****
+Hi William,
 
-Dear William,
+Please provide a quotation for an irregularly shaped **paper **card****.
 
-Please provide a quotation for an irregularly shaped **paper **card****:
-
-Material: 400 gsm white cardstock
-Dimensions: Approximately 10cm x 8cm at the widest points
-Printing: 4-color process front, 1-color black text back (4C + 1C)
-Finishing: Matte lamination, custom die-cut
-Quantity: 10,000 and 20,000 units
-The die-cut template is attached. What is the cost for the die-cut mold given this complexity?
+Material: 400 gsm **white **card** paper**
+Dimensions: Approximately 10cm x 8cm at the widest point
+Printing: 4C + 1C (back printed with black-and-white text)
+Finishing: Matte laminated, irregular die-cut.
+Quantity: 10,000 / 20,000 units
+The die-cut template is attached. What is the cost for a die-cut mold of this complexity?
 
 Regards,
 
@@ -895,7 +897,7 @@ Jessica
 
 | Source Term (原文字詞) | Approved English (術語庫) | Grok's Translation | Matches Term Base? |
 | :--- | :--- | :--- | :--- |
-| `纸板` | `cardboard`, `paperboard` | `cardboard` | ✅ Match |
+| `纸板` | `cardboard`, `paperboard` | `paperboard` | ✅ Match |
 
 ---
 
@@ -917,21 +919,19 @@ Alex
 ### Grok's Translation with Highlights
 
 ```text
-// Grok's Translation for Case 15
-
-Case 15: Re-print Request with Size Modification
-
 Subject: Re-print Request with Size Modification
 
-Dear Steve,
+Body:
 
-We need to re-print the color boxes from PO#20231105 with a modification:
+Hi Steve,
 
-The original size was 150mm x 150mm x 150mm. The new size is 160mm x 160mm x 160mm to accommodate a new inner lining. All other specifications, including 350 gsm **cardboard** and UV coating, remain unchanged.
+We need to re-print the color boxes from PO#20231105, but with a modification.
 
-Please provide a quotation for 5,000 units.
+The original size was 150x150x150mm. The new size needs to be 160x160x160mm to accommodate a new lining. All other specifications, including the 350 gsm **paperboard** and UV coating, remain the same.
 
-Thank you,
+Please quote for 5,000 units.
+
+Thanks,
 
 Alex
 ```
@@ -945,7 +945,7 @@ Alex
 | Source Term (原文字詞) | Approved English (術語庫) | Grok's Translation | Matches Term Base? |
 | :--- | :--- | :--- | :--- |
 | `哑光` | `matt`, `matte` | `matte` | ✅ Match |
-| `哑光覆膜` | `matte laminated`, `matt laminated` | N/A | ❌ Mismatch / Not Found |
+| `哑光覆膜` | `matte laminated`, `matt laminated` | `matte laminated` | ✅ Match |
 
 ---
 
@@ -975,28 +975,26 @@ Maria
 ### Grok's Translation with Highlights
 
 ```text
-// Grok's Translation for Case 16
+Subject: Quote: Single Book with Multiple Cover Versions
 
-Case 16: Quote for a Single Book with Multiple Cover Versions
+Body:
 
-Subject: Quotation for a Book with Multiple Cover Versions
+Hi Team,
 
-Dear Team,
+We plan to publish a paperback book with four different cover designs to target different markets.
 
-We plan to publish a paperback book with four different cover designs to target various markets:
-
-Text (identical for all versions):
+Text Block (identical for all versions):
 Dimensions: 6" x 9"
 Pages: 320 pages
-Paper: 80 gsm book paper, 1-color printing (1C + 1C)
-Cover (four versions, different designs, same specifications):
+Paper: 80 gsm book paper, 1C + 1C
+Cover (4 versions with different designs, same specifications):
 Paper: 250 gsm coated paper
-Printing: 4-color process (4C + 0C)
-Finishing: **matte** lamination
+Printing: 4C + 0C
+Finishing: **matte** laminated
 Total Quantity: 8,000 copies (2,000 copies per cover version)
 Would this approach be more cost-effective than printing four separate orders of 2,000 copies each?
 
-Best regards,
+Best,
 
 Maria
 ```
@@ -1011,9 +1009,9 @@ Maria
 | :--- | :--- | :--- | :--- |
 | `哑光` | `matt`, `matte` | `matte` | ✅ Match |
 | `哑光涂层` | `matt coating`, `matte coating` | `matte coating` | ✅ Match |
-| `灰板` | `greyboard` | N/A | ❌ Mismatch / Not Found |
+| `灰板` | `greyboard` | `greyboard` | ✅ Match |
 | `裱` | `laminating` | N/A | ❌ Mismatch / Not Found |
-| `盒蓋` | `box cover`, `lid` | `lid` | ✅ Match |
+| `盒蓋` | `box cover`, `lid` | `box cover` | ✅ Match |
 | `精装本` | `hardcover`, `hardback` | `hardcover` | ✅ Match |
 
 ---
@@ -1043,24 +1041,22 @@ Daniel
 ### Grok's Translation with Highlights
 
 ```text
-// Grok's Translation for Case 17
+Subject: Quote Request: **hardcover** Gift Box with Magnetic Closure
 
-Case 17: Quote Request for a **hardcover** Gift Box with Magnetic Closure
+Body:
 
-Subject: Quotation Request for **hardcover** Gift Box with Magnetic Closure
-
-Dear Alice,
+Hi Alice,
 
 Please provide a quotation for a high-end gift box with the following specifications:
 
-Type: **hardcover**-style box with magnetic closure
-Material: 157 gsm art paper mounted on 2mm gray board
-Internal Dimensions: 250mm x 180mm x 60mm
-Printing: 1-color Pantone Black 6 C (1C + 0C)
+Type: **hardcover** style box with magnetic closure
+Material: 157 gsm art paper laminated onto 2mm **greyboard**
+Size (Internal): 250 x 180 x 60mm
+Printing: 1C (Pantone Black 6 C) + 0C
 Finishing:
-Full **matte** coating
-Gold foil stamping on the logo on the **lid**
-Quantity: 1,000 and 2,000 units
+Overall **matte** coating
+Foil stamping logo on the **box cover**
+Quantity: 1,000 / 2,000 units
 Please confirm the lead time for a prototype.
 
 Regards,
@@ -1099,19 +1095,19 @@ Catherine
 ### Grok's Translation with Highlights
 
 ```text
-// Grok's Translation for Case 18
+Subject: Hardcover Book **endpaper** Material Inquiry
 
-Case 18: Inquiry About Changing **endpaper** Material to Reduce Cost
+Body:
 
-Subject: Inquiry Regarding **endpaper** Material for Hardcover Book
+Hi Steve,
 
-Dear Steve,
+In our previous quotation for the hardcover book (PO#Q2406-11), we used 150 gsm textured paper for the **endpaper**.
 
-In our previous quotation for the hardcover book (PO#Q2406-11), we used 150 gsm textured paper for the endpapers.
+The client now wishes to reduce costs. How much could we save by switching the **endpaper** to 120 gsm standard **book paper**?
 
-To reduce costs, what savings could be achieved by switching to 120 gsm standard **book paper** for the endpapers? The quantities remain 1,000 and 2,000 copies.
+The quantity remains 1,000 / 2,000 copies.
 
-Thank you,
+Thanks,
 
 Catherine
 ```
@@ -1124,10 +1120,10 @@ Catherine
 
 | Source Term (原文字詞) | Approved English (術語庫) | Grok's Translation | Matches Term Base? |
 | :--- | :--- | :--- | :--- |
-| `纸板` | `cardboard`, `paperboard` | `cardboard` | ✅ Match |
+| `纸板` | `cardboard`, `paperboard` | `paperboard` | ✅ Match |
 | `哑光` | `matt`, `matte` | `matte` | ✅ Match |
-| `哑光覆膜` | `matte laminated`, `matt laminated` | N/A | ❌ Mismatch / Not Found |
-| `上光` | `varnishing`, `coating` | `coating` | ✅ Match |
+| `哑光覆膜` | `matte laminated`, `matt laminated` | `matte laminated` | ✅ Match |
+| `上光` | `varnishing`, `coating` | `varnishing` | ✅ Match |
 | `彩盒` | `color box` | `color box` | ✅ Match |
 | `卡` | `card` | N/A | ❌ Mismatch / Not Found |
 
@@ -1163,28 +1159,26 @@ Linda
 ### Grok's Translation with Highlights
 
 ```text
-// Grok's Translation for Case 19
+Subject: Quote Request: Product Kit Packaging
 
-Case 19: Quotation Request for a Product Kit Including Box, Cards, and Assembly
+Body:
 
-Subject: Quotation Request for Product Kit Packaging
+Hi William,
 
-Dear William,
-
-We require a quotation for a product kit that includes a **color box** and cards:
+We need a quotation for a product kit that includes a **color box** and several cards.
 
 Item 1: **color box**
-Dimensions: 300mm x 200mm x 50mm
-Material: 250 gsm E-flute **cardboard**
-Printing: 4-color process (4C + 0C), glossy **coating**
-Item 2: Cards (5 Designs)
-Dimensions: 90mm x 50mm
-Material: 300 gsm coated paper
-Printing: 4-color process (4C + 4C), **matte** lamination
-Quantity: 2,000 cards per design (10,000 cards total)
+Dimensions: 300 x 200 x 50mm
+Material: 250 gsm E-flute **paperboard**
+Printing: 4C + 0C, **varnishing**
+Item 2: Cards (5 designs)
+Dimensions: 90 x 50mm
+Material: 300 gsm art paper
+Printing: 4C + 4C, **matte** laminated
+Quantity: 2,000 cards per design (total 10,000 cards)
 Item 3: Assembly and Packaging
-Insert 5 cards into each **color box** and package with shrink film
-Please provide a quotation for 2,000 kits, with separate pricing for each item and assembly costs.
+Insert 5 cards into the **color box**, then package the kit with shrink film.
+Please provide a quotation for 2,000 kits, with separate pricing for each item and the assembly cost.
 
 Best regards,
 
@@ -1200,8 +1194,8 @@ Linda
 | Source Term (原文字詞) | Approved English (術語庫) | Grok's Translation | Matches Term Base? |
 | :--- | :--- | :--- | :--- |
 | `哑光` | `matt`, `matte` | `matte` | ✅ Match |
-| `哑光覆膜` | `matte laminated`, `matt laminated` | N/A | ❌ Mismatch / Not Found |
-| `灰板` | `greyboard` | N/A | ❌ Mismatch / Not Found |
+| `哑光覆膜` | `matte laminated`, `matt laminated` | `matte laminated` | ✅ Match |
+| `灰板` | `greyboard` | `greyboard` | ✅ Match |
 | `裱` | `laminating` | N/A | ❌ Mismatch / Not Found |
 | `精装本` | `hardcover`, `hardback` | `hardcover` | ✅ Match |
 
@@ -1232,26 +1226,26 @@ Mark
 ### Grok's Translation with Highlights
 
 ```text
-// Grok's Translation for Case 20
+Subject: URGENT Sample Request - **hardcover** Book
 
-Case 20: Urgent Request for a Single, Full-Quality Sample Book
+Body:
 
-Subject: Urgent Sample Request - **hardcover** Book
+Hi Joe,
 
-Dear Joe,
+We are finalizing a project with a client and urgently need a physical sample to close the deal.
 
-To finalize a project with a client, we urgently need a physical sample of a **hardcover** book to close the deal:
+Please produce ONE full sample of the following **hardcover** book:
 
-Type: **hardcover** Book
-Dimensions: 21cm x 21cm
-Cover: 157 gsm art paper mounted on 2.5mm gray board, **matte** lamination, spot UV on the title
+Type: **hardcover**
+Size: 21 x 21cm
+Cover: 157 gsm art paper laminated onto 2.5mm **greyboard**, **matte** laminated, with spot UV on the title.
 Endpaper: 140 gsm black card paper
-Text: 128 pages, 157 gsm **matte** coated paper, 4-color printing (4C + 4C)
-As this is a rush job, please provide the cost and the fastest possible turnaround time for this single sample. We can arrange a courier for pickup once ready.
+Text: 128 pages, 157 gsm **matte** coated paper, 4C + 4C
+We understand this is a rush job. Please provide the cost and the fastest possible turnaround time for this single sample. We can arrange a courier to pick it up once ready.
 
-This is critical for us. Thank you for your assistance.
+This is critical for us. Thank you for your help.
 
-Best regards,
+Thanks,
 
 Mark
 ```
