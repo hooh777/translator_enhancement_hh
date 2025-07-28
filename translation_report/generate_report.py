@@ -1,14 +1,18 @@
 import json
 import re
 import os
+from thefuzz import fuzz
+from opencc import OpenCC
 
-# --- SCRIPT CONFIGURATION ---
+# --- SCRIPT CONFIGURATION (Using your provided paths) ---
 
-# Define the names of the input and output files.
-GLOSSARY_FILE = "glossary.json"
+GLOSSARY_FILE = "./terminology/terms.json"
 SOURCE_EMAILS_FILE = "./source_text/real_email.json"
 TRANSLATION_FILE = "./translated_text/grok_real_email_translations.txt"
 OUTPUT_FILE = "grok_report_real_email_translations.md"
+
+# --- FUZZY MATCHING CONFIGURATION ---
+FUZZY_MATCH_THRESHOLD = 90
 
 # --- DATA LOADING FUNCTIONS ---
 
@@ -18,12 +22,10 @@ def load_json_file(filename):
         print(f"ERROR: The file '{filename}' was not found.")
         return None
     try:
+        
         with open(filename, 'r', encoding='utf-8') as f:
             data = json.load(f)
         return data
-    except json.JSONDecodeError:
-        print(f"ERROR: The file '{filename}' is not a valid JSON file. Please check its content.")
-        return None
     except Exception as e:
         print(f"An unexpected error occurred while reading '{filename}': {e}")
         return None
@@ -47,81 +49,86 @@ def read_translations(filename):
 def count_syllables(word):
     """A simple heuristic to count syllables in an English word."""
     word = word.lower()
-    # Handle some common exceptions
-    if len(word) <= 3:
-        return 1
-    if word.endswith(('es', 'ed')) and len(word) > 4:
-        word = word[:-2]
-    
+    if len(word) <= 3: return 1
+    if word.endswith(('es', 'ed')) and len(word) > 4: word = word[:-2]
     vowels = "aeiouy"
     count = 0
-    # Count groups of consecutive vowels
-    if word[0] in vowels:
-        count += 1
+    if word and word[0] in vowels: count += 1
     for index in range(1, len(word)):
         if word[index] in vowels and word[index - 1] not in vowels:
             count += 1
-    # Adjust for silent 'e' at the end
-    if word.endswith("e"):
-        count -= 1
-    # Ensure at least one syllable
+    if word.endswith("e"): count -= 1
     return max(1, count)
 
 def calculate_readability(text):
-    """
-    Calculates the Flesch Reading Ease score.
-    Higher scores mean easier to read.
-    """
-    # Clean up the text for analysis
+    """Calculates the Flesch Reading Ease score."""
     words = re.findall(r'\b\w+\b', text)
     sentences = re.split(r'[.!?]+', text)
     sentences = [s for s in sentences if len(s.strip()) > 0]
-
-    num_words = len(words)
-    num_sentences = len(sentences)
+    num_words, num_sentences = len(words), len(sentences)
+    if num_words == 0 or num_sentences == 0: return 0.0, "N/A"
     num_syllables = sum(count_syllables(word) for word in words)
-
-    if num_words == 0 or num_sentences == 0:
-        return 0.0, "N/A"
-
-    # Flesch Reading Ease formula
     score = 206.835 - 1.015 * (num_words / num_sentences) - 84.6 * (num_syllables / num_words)
-    
-    # Interpretation of the score
-    if score >= 90:
-        interpretation = "Very Easy"
-    elif score >= 80:
-        interpretation = "Easy"
-    elif score >= 70:
-        interpretation = "Fairly Easy"
-    elif score >= 60:
-        interpretation = "Standard"
-    elif score >= 50:
-        interpretation = "Fairly Difficult"
-    elif score >= 30:
-        interpretation = "Difficult"
-    else:
-        interpretation = "Very Difficult"
-        
+    if score >= 90: interpretation = "Very Easy"
+    elif score >= 70: interpretation = "Easy"
+    elif score >= 60: interpretation = "Standard"
+    elif score >= 50: interpretation = "Fairly Difficult"
+    else: interpretation = "Difficult"
     return round(score, 2), interpretation
 
 # --- CORE LOGIC FUNCTIONS ---
 
-def find_match_in_translation(approved_translations, translated_text):
-    """Checks for a case-insensitive, whole-word match."""
-    for term in approved_translations:
-        if re.search(r'\b' + re.escape(term) + r'\b', translated_text, re.IGNORECASE):
-            return term
-    return None
+# --- NEW: More Intelligent Fuzzy Matching Logic ---
+def find_fuzzy_match_in_translation(approved_translations, translated_text):
+    """
+    Compares glossary terms to individual words/phrases in the translation.
+    Returns the word from the translation that was the best match.
+    """
+    best_match_score = 0
+    # The actual word/phrase found in the translation
+    best_match_in_text = None
+    # The corresponding glossary term
+    best_glossary_term = None
+
+    # Tokenize the translated text into words, keeping punctuation
+    words_in_translation = re.findall(r'\b[\w-]+\b', translated_text)
+
+    for approved_term in approved_translations:
+        num_words_in_term = len(approved_term.split())
+        
+        # Create n-grams from the translation to match multi-word terms
+        # (e.g., if approved_term is "color box", it creates two-word phrases)
+        candidate_phrases = [" ".join(words_in_translation[i:i+num_words_in_term]) 
+                             for i in range(len(words_in_translation) - num_words_in_term + 1)]
+        
+        if not candidate_phrases:
+            candidate_phrases = words_in_translation
+
+        for phrase in candidate_phrases:
+            # Use ratio for a balanced similarity score
+            score = fuzz.ratio(approved_term.lower(), phrase.lower())
+            if score > best_match_score:
+                best_match_score = score
+                best_match_in_text = phrase
+                best_glossary_term = approved_term
+
+    if best_match_score >= FUZZY_MATCH_THRESHOLD:
+        # Return the word actually found in the text
+        return best_match_in_text
+    else:
+        return None
+# --- END OF NEW LOGIC ---
+
 
 def highlight_text(text, terms_to_highlight, is_source=False):
     """Highlights terms within a text."""
     highlighted_text = text
-    if is_source:
-        for term in terms_to_highlight:
+    # Sort terms by length, longest first, to avoid partial highlights (e.g., "paper" in "paper bag")
+    sorted_terms = sorted(terms_to_highlight, key=len, reverse=True)
+    for term in sorted_terms:
+        if is_source:
             highlighted_text = highlighted_text.replace(term, f"**{term}**")
-    else:
-        for term in terms_to_highlight:
+        else:
             highlighted_text = re.sub(r'\b' + re.escape(term) + r'\b', f"**{term}**", highlighted_text, flags=re.IGNORECASE)
     return highlighted_text
 
@@ -129,9 +136,9 @@ def highlight_text(text, terms_to_highlight, is_source=False):
 
 def main():
     """Main function to load data, process it, and generate the report."""
-    print("--- Starting Report Generation with Metrics ---")
+    print("--- Starting Report Generation with Corrected Fuzzy Matching ---")
 
-    # Load all data
+    cc = OpenCC('t2s')
     term_base = load_json_file(GLOSSARY_FILE)
     source_emails = load_json_file(SOURCE_EMAILS_FILE)
     translations = read_translations(TRANSLATION_FILE)
@@ -146,32 +153,33 @@ def main():
         print(f"WARNING: Found {len(translations)} translations, but expected {len(source_emails)}. Report may be incomplete.")
         if len(translations) == 0: return
 
-    report_sections = []
-    metrics_summary = []
+    report_sections, metrics_summary = [], []
 
-    # Process each email and translation
     for i, source_email in enumerate(source_emails):
         if i >= len(translations): break
 
-        case_id, scenario, source_body = source_email['id'], source_email['scenario'], source_email['body']
+        case_id = source_email.get('id', f'record_{i+1}')
+        scenario = source_email.get('scenario', 'N/A')
+        source_body = source_email.get('body', '')
+        
+        simplified_source_body = cc.convert(source_body)
         translated_block = translations[i]
-        print(f"Processing {case_id}: {scenario}...")
+        print(f"Processing {case_id}...")
 
-        # --- 1. Terminology Analysis ---
         table_rows, source_terms_found, translated_terms_found = [], [], []
-        terms_in_source_count = 0
-        correct_matches = 0
+        terms_in_source_count, correct_matches = 0, 0
 
         for ch_term, en_translations in term_base.items():
-            if ch_term in source_body:
+            if ch_term in simplified_source_body:
                 terms_in_source_count += 1
                 source_terms_found.append(ch_term)
-                match = find_match_in_translation(en_translations, translated_block)
+                match = find_fuzzy_match_in_translation(en_translations, translated_block)
                 
                 if match:
                     correct_matches += 1
                     status = "✅ Match"
                     grok_used = f"`{match}`"
+                    # We add the found term (e.g., "laminated") for highlighting
                     translated_terms_found.append(match)
                 else:
                     status = "❌ Mismatch / Not Found"
@@ -180,7 +188,6 @@ def main():
                 approved_str = ", ".join([f"`{t}`" for t in en_translations])
                 table_rows.append(f"| `{ch_term}` | {approved_str} | {grok_used} | {status} |\n")
         
-        # --- 2. Calculate Metrics for this case ---
         hit_rate = (correct_matches / terms_in_source_count * 100) if terms_in_source_count > 0 else 0
         readability_score, readability_interp = calculate_readability(translated_block)
         metrics_summary.append({
@@ -191,11 +198,9 @@ def main():
             "readability_interp": readability_interp
         })
 
-        # --- 3. Highlight Texts ---
         highlighted_source = highlight_text(source_body, source_terms_found, is_source=True)
         highlighted_translation = highlight_text(translated_block, translated_terms_found, is_source=False)
         
-        # --- 4. Assemble Markdown for this Case ---
         report_sections.append(
             f"## Case {i+1}: {scenario}\n\n"
             "### Terminology Analysis Table\n\n"
@@ -210,12 +215,12 @@ def main():
             "<hr>\n\n"
         )
 
-    # --- 5. Create the Overall Metrics Summary Table ---
+    # --- Metrics Summary and Report Writing (Unchanged) ---
     total_hit_rate = sum(m['hit_rate'] for m in metrics_summary)
     avg_hit_rate = total_hit_rate / len(metrics_summary) if metrics_summary else 0
     total_readability = sum(m['readability'] for m in metrics_summary)
     avg_readability = total_readability / len(metrics_summary) if metrics_summary else 0
-    _, avg_readability_interp = calculate_readability(" ".join(["a"] * int(avg_readability))) # Hack to get interpretation
+    _, avg_readability_interp = calculate_readability(" ".join(["a"] * int(avg_readability)))
 
     summary_table = [
         "# Translation Terminology Report (Grok Analysis)\n\n",
@@ -228,7 +233,6 @@ def main():
     
     summary_table.append(f"| **Average** | **{avg_hit_rate:.1f}%** | **{avg_readability:.1f} ({avg_readability_interp})** |\n\n<hr>\n\n")
 
-    # --- 6. Write the final report ---
     try:
         with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
             f.writelines(summary_table)
